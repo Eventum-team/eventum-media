@@ -1,0 +1,29 @@
+{
+  "name": "eventum-media-ms",
+  "version": "1.0.0",
+  "description": "<h2 id=\"titulo\">eventum-media-ms</h2>",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eventum-team/eventum-media-ms.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Eventum-team/eventum-media-ms/issues"
+  },
+  "homepage": "https://github.com/Eventum-team/eventum-media-ms#readme",
+  "dependencies": {
+    "ejs": "^3.0.2",
+    "express": "^4.17.1",
+    "multer": "^1.4.2",
+    "uuid": "^7.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
+}
