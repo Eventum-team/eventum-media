@@ -5,6 +5,7 @@ const { v4 : uuidv4 } = require('uuid');
 
 // Initialitazion
 const app = express();
+require('./repositories/database');
 
 // Settings
 app.set('port', 3000);
