@@ -1,0 +1,285 @@
+#Test with: http://editor.swagger.io/
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Microservice for Media
+  description: nodejs + MongoDB
+  license:
+    name: Eventum, 2020-I
+host: host:3000
+basePath: /
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /image:
+    get:
+      summary: Returns all images
+      operationId: getAll
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: '#/definitions/ImageList'
+        '406':
+          description: Not Acceptable (Invalid Params)
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+
+  /image/profile:
+    get:
+      summary: Returns all profile images
+      operationId: getProfile
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: '#/definitions/Image'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '406':
+            description: Not Acceptable (Invalid Params)
+            schema:
+              $ref: '#/definitions/ErrorModel'
+        '500':
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+  
+  /image/profile/{id_type}:
+    get:
+      summary: Returns a profile image with the given id_type
+      operationId: getOneProfile
+      parameters:
+        - name: id_type
+          in: path
+          description: The id of the profile image to be returned
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: '#/definitions/Image'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '406':
+            description: Not Acceptable (Invalid Params)
+            schema:
+              $ref: '#/definitions/ErrorModel'
+        '500':
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+  
+  /image/group:
+    get:
+      summary: Returns all public images
+      operationId: getAllPublic
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: '#/definitions/Image'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '406':
+            description: Not Acceptable (Invalid Params)
+            schema:
+              $ref: '#/definitions/ErrorModel'
+        '500':
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+  
+  /image/group/{id_group}:
+    get:
+      summary: Returns all public images with the given id_group
+      operationId: getOnePublic
+      parameters:
+        - name: id_group
+          in: path
+          description: The id_group of the public images to be returned
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: '#/definitions/Image'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '406':
+            description: Not Acceptable (Invalid Params)
+            schema:
+              $ref: '#/definitions/ErrorModel'
+        '500':
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+
+  /image/upload:
+    post:
+      summary: Upload a new image
+      operationId: post
+      parameters:
+        - name: image
+          in: body
+          required: true
+          description: Image object
+          schema:
+            $ref: '#/definitions/ImageInput'
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+  
+  /image/deleteProfile/{id_type}/{id}:
+    delete:
+      summary: Deletes a profile image with the given id_type and id
+      operationId: deleteOne
+      parameters:
+        - name: id
+          in: path
+          description: The id of the user to be deleted
+          required: true
+          type: string
+        - name: id_type
+          in: path
+          description: The group type id 
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Ok
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '406':
+            description: Not Acceptable (Invalid Params)
+            schema:
+              $ref: '#/definitions/ErrorModel'
+        '500':
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+  
+  /image/deletePublic/{id_group}/{id}:
+    delete:
+      summary: Deletes a public image with the given id_ group and id
+      operationId: deletePublic
+      parameters:
+        - name: id
+          in: path
+          description: The id of the user to be deleted
+          required: true
+          type: string
+        - name: id_group
+          in: path
+          description: The group type id 
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Ok
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '406':
+            description: Not Acceptable (Invalid Params)
+            schema:
+              $ref: '#/definitions/ErrorModel'
+        '500':
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+
+definitions:
+
+  # image
+  Image:
+    type: object
+    properties:
+      profile: 
+        type: boolean
+      id_type:
+        type: string
+      id_group:
+        type: string
+      fieldname: 
+        type: string
+      originalname: 
+        type: string
+      mimetype: 
+        type: string
+      filename:   
+        type: string
+      path: 
+        type: string
+      size: 
+        type: number
+      created_at: 
+        type: string
+
+  ImageInput:
+    type: object
+    properties:
+      profile: 
+        type: boolean
+      id_type:
+        type: string
+      id_group:
+        type: string
+      image: 
+        type: object
+
+  ImageList:
+    type: object
+    required:
+      - total
+      - list
+    properties:
+      total:
+        type: number
+      list:
+        type: array
+        items:
+          $ref: '#/definitions/Image'
+
+# Errors
+  ErrorModel:
+    type: object
+    required:
+      - message
+      - code
+    properties:
+      message:
+        type: string
+      code:
+        type: number
+      description:
+        type: object

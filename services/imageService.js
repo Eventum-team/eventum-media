@@ -63,8 +63,8 @@ async function deleteOne(req, res){
     const image = await Image.findById(id);
     if(image.id_type==id_type && image.profile){
         console.log(image);
-        //await unlink(path.resolve('.'+ image.path));
-        //await image.remove();
+        await unlink(path.resolve('.'+ image.path));
+        await image.remove();
         console.log('image identyfied by ' + id + ' owned by '+ id_type +' was deleted');
         res.send('image identyfied by ' + id + ' owned by '+ id_type +' was deleted');
         //res.redirect('/');
@@ -80,8 +80,8 @@ async function deletePublic(req, res){
     const image = await Image.findById(id);
     if(image.id_group==id_group && !image.profile){
         console.log(image);
-        //await unlink(path.resolve('.'+ image.path));
-        //await image.remove();
+        await unlink(path.resolve('.'+ image.path));
+        await image.remove();
         console.log('image identyfied by ' + id + ' owned by '+ id_group +' was deleted');
         res.send('image identyfied by ' + id + ' owned by '+ id_group +' was deleted');
         //res.redirect('/');
