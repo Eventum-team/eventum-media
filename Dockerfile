@@ -1,15 +1,7 @@
-FROM node:10-alpine
-
-RUN mkdir -p /eventum-media-ms
-
+FROM node:latest
 WORKDIR /eventum-media-ms
-
 COPY package*.json ./
-
 RUN npm install
-
-COPY . /eventum-media-ms
-
+COPY . .
 EXPOSE 3000
-
-CMD [ “npm”, “start” ]
+CMD ["npm", "start"]
