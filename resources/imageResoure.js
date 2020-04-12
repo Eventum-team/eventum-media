@@ -1,52 +1,40 @@
 const { Router } = require('express');
 const router = Router();
-const path = require('path');
-const { unlink } = require('fs-extra');
 
 
 const Image = require('../models/image');
+const service = require('../services/imageService');
 
-router.get('/', async (req,res) =>{
-    const images = await Image.find();   
-    console.log(images);
-    res.render('index');
+router.get('/image', (req,res) =>{
+    service.getAll(req,res);
 });
 
-router.get('/upload', (req,res) =>{//temporal
-    res.render('upload');
+router.get('/image/profile', (req,res) =>{
+    service.getProfile(req,res);
 });
 
-router.post('/upload',async (req,res) =>{
-    //console.log(req.file);
-    const image = new Image();
-
-    image.fieldname = req.file.fieldname;
-    image.originalname = req.file.originalname;
-    image.mimetype = req.file.mimetype;
-    image.filename = req.file.filename;
-    image.path = 'public/uploads/' + req.file.filename;
-    image.size = req.file.size;
-
-    await image.save();
-    console.log(image);
-    //res.send('Uploaded');
-    res.redirect('/');
+router.get('/image/profile/:id_type', (req,res) =>{
+    service.getOneProfile(req,res);
 });
 
-router.get('/image/:id', async (req,res) =>{
-    const { id } = req.params;
-    const image = await Image.findById(id);
-    console.log(image);
-    res.send('image identyfied by ' + id);
+router.get('/image/group', (req,res) =>{
+    service.getAllPublic(req,res);
 });
 
-router.get('/image/:id/delete', async (req,res) =>{
-    const { id } = req.params;
-    const image = await Image.findByIdAndDelete(id);
-    await unlink(path.resolve('./' + image.path));
-    console.log('image identyfied by ' + id + ' was deleted');
-    //res.send('image identyfied by ' + id + ' was deleted');
-    res.redirect('/');
+router.get('/image/group/:id_group', (req,res) =>{
+    service.getOnePublic(req,res);
+});
+
+router.post('/image/upload', (req,res) =>{//-/upload
+    service.post(req, res);
+});
+
+router.delete('/image/deleteProfile/:id_type/:id', (req,res) =>{
+    service.deleteOne(req, res);
+});
+
+router.delete('/image/deletePublic/:id_group/:id', (req,res) =>{
+    service.deletePublic(req, res);
 });
 
 module.exports = router;  

@@ -17,7 +17,7 @@ const storage = multer.diskStorage({
     filename: (req, file ,cb)=>{
         cb(null, uuidv4() + path.extname(file.originalname).toLocaleLowerCase());
     }
-}); 
+});
 
 app.use(multer({
     storage,
@@ -38,7 +38,7 @@ app.use(multer({
 app.use(require('./resources/imageResoure'));
 
 // static files acceso desde navegador
-app.use(express.static('public'));
+app.use(express.static('public'));//testeo
 
 // Start
 app.listen(app.get('port'), () =>{

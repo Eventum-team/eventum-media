@@ -1,6 +1,9 @@
 const { Schema, model } = require('mongoose');
 
 const imageSchema = new Schema({
+    profile: { type: Boolean },
+    id_type: { type: String },
+    id_group: { type: String },
     fieldname: { type: String},
     originalname: { type: String},
     mimetype: { type: String},
