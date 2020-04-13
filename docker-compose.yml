@@ -1,15 +1,13 @@
 version: "3"
 services:
-    eventum-media-ms:
+    app:
         container_name: eventum-media-ms
         build: .
-        volumes:    
-         - "./eventum-media-ms:/eventum-media-ms/"
         ports:
             - "3000:3000"
         links:
             - eventum-media-db
-    eventum-media-db:
+    mongo:
         container_name: eventum-media-db
         image: mongo
         volumes:

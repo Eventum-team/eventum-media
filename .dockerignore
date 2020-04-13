@@ -1,10 +1,2 @@
-<<<<<<< HEAD
-.git
-.gitignore
-README.md
-docker-compose.yml
-node_modules
-=======
 node_modules
 npm-debug.log
->>>>>>> develop
