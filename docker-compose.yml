@@ -2,8 +2,9 @@ version: "2"
 services:
     eventum-media-ms:
         container_name: eventum-media-ms
-        restart: always
         build: .
+        volumes:    
+         - "./eventum-media-ms:/eventum-media-ms/"
         ports:
             - "3000:3000"
         links:
