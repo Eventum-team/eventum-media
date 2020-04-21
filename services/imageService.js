@@ -39,16 +39,24 @@ async function getOneProfileGroup(req, res){
 };
 
 async function getAllEvent(req, res){
-    const { id_group, id_event } = req.params;
-    const image = await Image.find({ profile: false, id_group, id_event });
+    const { id_type, id_event } = req.params;
+    const image = await Image.find({ profile: false, id_type, id_event });
+    console.log(image);
+    res.send(image);
+    //res.send('profile images'); 
+};//user
+
+async function getOneProfileEvent(req, res){
+    const { id_event } = req.params;
+    const image = await Image.find({ profile: true, id_event });
     console.log(image);
     res.send(image);
     //res.send('profile images'); 
 };
 
-async function getOneProfileEvent(req, res){
-    const { id_event } = req.params;
-    const image = await Image.find({ profile: true, id_event });
+async function getAllGroupEvent(req, res){
+    const { id_group, id_event } = req.params;
+    const image = await Image.find({ profile: false, id_group, id_event });
     console.log(image);
     res.send(image);
     //res.send('profile images'); 
@@ -127,6 +135,40 @@ async function deleteProfileGroup(req, res){
 };
 
 async function deleteEvent(req, res){
+    const { id, id_type, id_event } = req.params;
+    const image = await Image.findById(id);
+    if(image.id_type==id_type && image.id_event==id_event && !image.profile){
+        console.log(image);
+        //await unlink(path.resolve('.'+ image.path));
+        await image.remove();
+        console.log('image identyfied by ' + id + ' owned by '+ id_type +' was deleted');
+        res.send('image identyfied by ' + id + ' owned by '+ id_type +' was deleted');
+        //res.redirect('/');
+    } else {
+        console.log(image);
+        console.log('you can´t delete this image');
+        res.send('you can´t delete this image');
+    }   
+};//user
+
+async function deleteProfileEvent(req, res){
+    const { id, id_type, id_event } = req.params;
+    const image = await Image.findById(id);
+    if(image.id_type==id_type && image.id_event==id_event && image.profile){
+        console.log(image);
+        //await unlink(path.resolve('.'+ image.path));
+        await image.remove();
+        console.log('image identyfied by ' + id + ' owned by '+ id_type +' was deleted');
+        res.send('image identyfied by ' + id + ' owned by '+ id_type +' was deleted');
+        //res.redirect('/');
+    } else {
+        console.log(image);
+        console.log('you can´t delete this image');
+        res.send('you can´t delete this image');
+    }   
+};//user
+
+async function deleteGroupEvent(req, res){
     const { id, id_group, id_event } = req.params;
     const image = await Image.findById(id);
     if(image.id_group==id_group && image.id_event==id_event && !image.profile){
@@ -143,7 +185,7 @@ async function deleteEvent(req, res){
     }   
 };
 
-async function deleteProfileEvent(req, res){
+async function deleteGroupProfileEvent(req, res){
     const { id, id_group, id_event } = req.params;
     const image = await Image.findById(id);
     if(image.id_group==id_group && image.id_event==id_event && image.profile){
@@ -167,6 +209,7 @@ exports.getAllGroup = getAllGroup;
 exports.getOneProfileGroup = getOneProfileGroup;
 exports.getAllEvent = getAllEvent;
 exports.getOneProfileEvent = getOneProfileEvent;
+exports.getAllGroupEvent = getAllGroupEvent;
 exports.getAllGroup = getAllGroup;
 exports.createImage = createImage;
 exports.deleteProfile = deleteProfile;
@@ -174,3 +217,5 @@ exports.deleteGroup = deleteGroup;
 exports.deleteProfileGroup = deleteProfileGroup;
 exports.deleteEvent = deleteEvent;
 exports.deleteProfileEvent = deleteProfileEvent;
+exports.deleteGroupEvent = deleteGroupEvent;
+exports.deleteGroupProfileEvent = deleteGroupProfileEvent;
