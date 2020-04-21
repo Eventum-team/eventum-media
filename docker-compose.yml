@@ -4,9 +4,9 @@ services:
         container_name: eventum-media-ms
         build: .
         ports:
-            - "3000:3000"
+            - "3001:3001"
         links:
-            - eventum-media-db
+            - mongo
     mongo:
         container_name: eventum-media-db
         image: mongo

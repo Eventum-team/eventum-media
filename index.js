@@ -2,16 +2,19 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const { v4 : uuidv4 } = require('uuid');
+const bodyParser = require("body-parser");
 
 // Initialitazion
 const app = express();
 require('./repositories/database');
 
 // Settings
-app.set('port', 3000);
+app.set('port', 3001);
 app.set('view engine', 'ejs');
 
 // Middleware
+app.use(bodyParser.json()); // <--- Here
+/*
 const storage = multer.diskStorage({
     destination: 'public/uploads',
     filename: (req, file ,cb)=>{
@@ -31,8 +34,7 @@ app.use(multer({
         }
         cb('Error: Archivo no soportado');
     }
-}).single('image'));
-
+}).single('image'));*/
 
 // Routes
 app.use(require('./resources/imageResoure'));

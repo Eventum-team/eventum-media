@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 mongoose
   .connect(
-    'mongodb://mongo:27017/docker-node-mongo',
+    'mongodb://localhost/test_db',//for despliegue//'mongodb://mongo:27017/imageDB',
     { useNewUrlParser: true }
   ).then(() => console.log('MongoDB Connected')).catch(err => console.log(err));
 
