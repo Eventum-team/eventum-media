@@ -15,11 +15,8 @@ require('./repositories/database');
 // Settings
 app.set('port', 8443);
 app.set('view engine', 'ejs');
-const options = {
-    key: fs.readFileSync('key.pem'),
-    cert: fs.readFileSync('cert.pem'),
-    passphrase: "0000"
-  };
+
+
 
 
 // Middleware
@@ -59,10 +56,17 @@ app.use(require('./resources/imageResoure'));
 //    console.log('Https App started');
 //});
 
+
+const options = {
+    key: fs.readFileSync('key.pem'),
+    cert: fs.readFileSync('cert.pem'),
+    passphrase: "0000"
+  };
+
 var httpServer = http.createServer(app);
 var httpsServer = https.createServer(options, app);
 
-httpServer.listen(8080);
+httpServer.listen(3001);
 httpsServer.listen(8443);
 
 
