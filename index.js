@@ -49,6 +49,9 @@ app.use(require('./resources/imageResoure'));
 
 // static files acceso desde navegador
 app.use(express.static('public'));//testeo
+http.createServer(app).listen(5000, function() {
+    console.log('Http App started');
+});
 
 https.createServer(options, app).listen(443, function() {
     console.log('Https App started');
