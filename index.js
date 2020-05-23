@@ -50,14 +50,14 @@ app.use(multer({
 app.use(require('./resources/imageResoure'));
 
 // static files acceso desde navegador
-app.use(express.static('public'));//testeo
-http.createServer(app).listen(5000, function() {
-    console.log('Http App started');
-});
+//app.use(express.static('public'));//testeo
+//http.createServer(app).listen(5000, function() {
+//    console.log('Http App started');
+//});
 
-https.createServer(options, app).listen(443, function() {
-    console.log('Https App started');
-});
+//https.createServer(options, app).listen(443, function() {
+//    console.log('Https App started');
+//});
 
 // var server = https.createServer(app).listen(8443, function() {
 //     console.log('Https App started');
@@ -65,6 +65,6 @@ https.createServer(options, app).listen(443, function() {
 
 
 // // Start
-// app.listen(app.get('port'), () =>{
-//     console.log(`Server on port ${app.get('port')}`);
-// });
+ app.listen(app.get('port'), () =>{
+     console.log(`Server on port ${app.get('port')}`);
+ });
