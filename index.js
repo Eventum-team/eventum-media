@@ -4,6 +4,8 @@ const path = require('path');
 const { v4 : uuidv4 } = require('uuid');
 const bodyParser = require("body-parser");
 var https = require('https');
+var http = require('http');
+
 var fs = require('fs');
 
 // Initialitazion
