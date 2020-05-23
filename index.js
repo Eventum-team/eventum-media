@@ -13,7 +13,7 @@ const app = express();
 require('./repositories/database');
 
 // Settings
-app.set('port', 3001);
+app.set('port', 5000);
 app.set('view engine', 'ejs');
 const options = {
     key: fs.readFileSync('key.pem'),
