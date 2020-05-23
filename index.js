@@ -13,7 +13,7 @@ const app = express();
 require('./repositories/database');
 
 // Settings
-app.set('port', 5000);
+app.set('port', 8443);
 app.set('view engine', 'ejs');
 const options = {
     key: fs.readFileSync('key.pem'),
@@ -51,20 +51,22 @@ app.use(require('./resources/imageResoure'));
 
 // static files acceso desde navegador
 //app.use(express.static('public'));//testeo
-//http.createServer(app).listen(5000, function() {
+// http.createServer(app).listen(app.get('port'), function() {
 //    console.log('Http App started');
-//});
+// });
 
 //https.createServer(options, app).listen(443, function() {
 //    console.log('Https App started');
 //});
 
-var server = https.createServer(app).listen(8443, function() {
-    console.log('Https App started');
-});
+var httpServer = http.createServer(app);
+var httpsServer = https.createServer(options, app);
+
+httpServer.listen(8080);
+httpsServer.listen(8443);
 
 
-// // Start
+// Start
 //  app.listen(app.get('port'), () =>{
 //      console.log(`Server on port ${app.get('port')}`);
 //  });
