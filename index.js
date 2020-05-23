@@ -59,12 +59,12 @@ app.use(require('./resources/imageResoure'));
 //    console.log('Https App started');
 //});
 
-// var server = https.createServer(app).listen(8443, function() {
-//     console.log('Https App started');
-// });
+var server = https.createServer(app).listen(8443, function() {
+    console.log('Https App started');
+});
 
 
 // // Start
- app.listen(app.get('port'), () =>{
-     console.log(`Server on port ${app.get('port')}`);
- });
+//  app.listen(app.get('port'), () =>{
+//      console.log(`Server on port ${app.get('port')}`);
+//  });
