@@ -50,10 +50,13 @@ app.use(require('./resources/imageResoure'));
 // static files acceso desde navegador
 app.use(express.static('public'));//testeo
 
-
-var server = https.createServer(app).listen(8443, function() {
+https.createServer(options, app).listen(443, function() {
     console.log('Https App started');
 });
+
+// var server = https.createServer(app).listen(8443, function() {
+//     console.log('Https App started');
+// });
 
 
 // // Start
