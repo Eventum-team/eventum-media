@@ -1,0 +1,19 @@
+.mainLayout {
+  min-height: 100vh;
+}
+
+.mainBackground {
+  /* background-image: url('../../assets//img/backgrounds/Login5.jpg'); */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* background-color:  #f8f8f8; */
+}
+
+.footer {
+  text-align: center;
+  /* min-height: 100px; */
+  background-color: #0e1e30;
+  color: #fff;
+  font-weight: bold;
+}
