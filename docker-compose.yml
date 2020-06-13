@@ -5,12 +5,3 @@ services:
         build: .
         ports:
             - "3001:3001"
-        links:
-            - mongo
-    mongo:
-        container_name: eventum-media-db
-        image: mongo
-        volumes:
-            - ./data:/data/db
-        ports:
-            - "27017:27017"
