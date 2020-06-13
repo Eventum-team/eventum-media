@@ -1,5 +1,5 @@
-const ipApi = '190.24.19.228'; // 190.24.19.228 o localhost
-const portApi = '5000'; 
+const ipApi = '54.197.130.242'; // 190.24.19.228 o localhost
+const portApi = '32670'; 
 
 
 export const ipApiGetway = `http://${ipApi}:${portApi}/graphql`;

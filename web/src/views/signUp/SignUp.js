@@ -10,26 +10,13 @@ import "./index.css";
 
 
 const SIGNUP_MUTATION = gql`
-mutation UserAuthCreate(
-  $username: String!, 
-  $password: String!, 
-  $name: String!, 
-  $phone_number: String!, 
-  $age: Int!, 
-  $career: String!
-  $photo: String!
-){
-  userAuthcreate(input:{
-    username: $username
-    password: $password
-    name: $name
-    phone_number: $phone_number
-    age: $age
-    career: $career
-    photo: $photo
-    status: "Ok"
-  }){
-    message
+mutation{
+  createImage(input:{profile:true, id_type:"001", path:"$photo"}){
+    _id
+    profile
+    id_type
+    id_event
+    path
   }
 }
 `;
